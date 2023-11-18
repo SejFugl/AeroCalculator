@@ -2,70 +2,68 @@
 
 public partial class MainPage : ContentPage
 {
-	string previousOperator;
-	string previousValue;
+    private string previousOperator;
+    private string previousValue;
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
-	private void OnNumberClicked(object sender, EventArgs e)
-	{
-		Button button = (Button)sender;
-		Input.Text += button.Text;
-	}
+    private void OnNumberClicked(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        Input.Text += button.Text;
+    }
 
-	private void OnACClicked(object sender, EventArgs e)
-	{
-		Input.Text = "";
-		previousValue = "";
-	}
+    private void OnACClicked(object sender, EventArgs e)
+    {
+        Input.Text = "";
+        previousValue = "";
+    }
 
-	private void OnOperatorClicked(object sender, EventArgs e)
-	{
-		Button button = (Button)sender;
-		Input.Text += button.Text;
-		previousOperator = button.Text;
-	}
+    private void OnOperatorClicked(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        Input.Text += button.Text;
+        previousOperator = button.Text;
+    }
 
-	private string GetLastOperand(string expression)
-	{
+    private string GetLastOperand(string expression)
+    {
         int lastOperatorIndex = expression.LastIndexOfAny(new[] { '+', '-', '*', '/' });
 
-		if (lastOperatorIndex == -1)
-		{
-			return expression;
-		}
+        if (lastOperatorIndex == -1)
+        {
+            return expression;
+        }
 
-		string lastOperand = expression.Substring(lastOperatorIndex + 1);
+        string lastOperand = expression.Substring(lastOperatorIndex + 1);
 
-		return lastOperand;
-	}
+        return lastOperand;
+    }
 
-	private void OnCalculateClicked(object sender, EventArgs e)
-	{
-		try
-		{
+    private void OnCalculateClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var dataTable = new System.Data.DataTable();
+
             string expression = Input.Text;
-			string previousCalculation = previousOperator + previousValue;
+            string previousCalculation = previousOperator + previousValue;
 
             if (HasOperator(expression))
-			{
-                var dataTable = new System.Data.DataTable();
-
+            {
                 var result = dataTable.Compute(expression, "");
 
-				string lastOperand = GetLastOperand(expression);
+                string lastOperand = GetLastOperand(expression);
 
-				previousValue = lastOperand;
+                previousValue = lastOperand;
 
                 Input.Text = $"{result}";
             }
             else
             {
-				var dataTable = new System.Data.DataTable();
-
                 string lastOperand = GetLastOperand(expression + previousCalculation);
 
                 var result = dataTable.Compute(expression + "" + previousCalculation, "");
@@ -73,20 +71,18 @@ public partial class MainPage : ContentPage
                 Input.Text = $"{result}";
             }
         }
-		catch (Exception)
-		{
-			Input.Text = "Invalid expression";
-		}
-	}
+        catch (Exception)
+        {
+            Input.Text = "Invalid expression";
+        }
+    }
 
-	private bool HasOperator(string expression)
-	{
-		return expression.Contains("+")
-			|| expression.Contains("-")
-			|| expression.Contains("*")
-			|| expression.Contains("/");
-
-	}
+    private bool HasOperator(string expression)
+    {
+        return expression.Contains("+")
+            || (expression.Length > 1 && expression.Substring(1).Contains("-"))
+            || expression.Contains("*")
+            || expression.Contains("/");
+    }
 
 }
-
