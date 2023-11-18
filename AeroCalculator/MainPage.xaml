@@ -1,58 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AeroCalculator.MainPage"
-             BackgroundColor="Aqua"
-             Shell.NavBarIsVisible="False">
+<ContentPage
+    x:Class="AeroCalculator.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Aqua"
+    Shell.NavBarIsVisible="False">
 
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25"
+        VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-            
-            <Entry Placeholder="Input"
-                x:Name="Input"
-                PlaceholderColor="Black"
-                HorizontalOptions="Center"
-                FontSize="18" />
+        <Entry
+            x:Name="Input"
+            IsReadOnly="True"
+            FontSize="18"
+            HorizontalOptions="Center"
+            Placeholder="Input"
+            PlaceholderColor="Black" />
 
-            <Button Text="2"
-                Clicked="OnNumberClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnNumberClicked"
+            Text="2"
+            WidthRequest="50" />
 
-            <Button Text="3"
-                Clicked="OnNumberClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnNumberClicked"
+            Text="3"
+            WidthRequest="50" />
 
-            <Button Text="+"
-                Clicked="OnOperatorClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnOperatorClicked"
+            CornerRadius="20"
+            Text="+"
+            WidthRequest="40" />
 
-            <Button Text="-"
-                Clicked="OnOperatorClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnOperatorClicked"
+            CornerRadius="20"
+            Text="-"
+            WidthRequest="40" />
 
-            <Button Text="*"
-                Clicked="OnOperatorClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnOperatorClicked"
+            CornerRadius="20"
+            Text="*"
+            WidthRequest="40" />
 
-            <Button Text="/"
-                Clicked="OnOperatorClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnOperatorClicked"
+            CornerRadius="20"
+            Text="/"
+            WidthRequest="40" />
 
-            <Button Text="="
-                Clicked="OnCalculateClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnCalculateClicked"
+            Text="="
+            WidthRequest="50" />
 
-            <Button Text="AC"
-                Clicked="OnACClicked"
-                WidthRequest="50" />
+        <Button
+            Clicked="OnACClicked"
+            Text="AC"
+            WidthRequest="50" />
 
     </VerticalStackLayout>
 
